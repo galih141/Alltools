@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Link Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#173B2E;
+    --ink:#131311;
+    --paper:#F5EFDD;
+    --coral:#FF6A3D;
+    --mustard:#F4B740;
+    --sky:#7FC6C0;
+    --line:#131311;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{margin:0;padding:0;}
+
+  body{
+    background:var(--bg);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:56px 18px 90px;
+    min-height:100%;
+  }
+
+  .page{
+    width:100%;
+    max-width:440px;
+  }
+
+  /* header sticker */
+  .header{
+    background:var(--paper);
+    border:3px solid var(--line);
+    border-radius:14px;
+    padding:22px 22px 20px;
+    box-shadow: 7px 7px 0 var(--line);
+    transform: rotate(-1.2deg);
+    margin-bottom:34px;
+    position:relative;
+  }
+
+  .badge{
+    position:absolute;
+    top:-14px;
+    right:18px;
+    background:var(--mustard);
+    border:3px solid var(--line);
+    border-radius:999px;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:16px;
+    padding:2px 14px 4px;
+    transform: rotate(6deg);
+  }
+
+  .avatar{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background: repeating-linear-gradient(45deg, var(--coral), var(--coral) 6px, var(--mustard) 6px, var(--mustard) 12px);
+    border:3px solid var(--line);
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-family:'Archivo Black', sans-serif;
+    font-size:30px;
+    line-height:1;
+    margin:0 0 8px;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+  }
+
+  .tagline{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:22px;
+    color:var(--ink);
+    margin:0;
+    line-height:1.15;
+  }
+
+  /* folders */
+  .folders{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .folder{
+    background:var(--paper);
+    border:3px solid var(--line);
+    border-radius:12px;
+    box-shadow: 6px 6px 0 var(--line);
+    overflow:hidden;
+    transform: rotate(var(--r, 0deg));
+  }
+
+  .folders > *:nth-child(1){ --r: -0.8deg; }
+  .folders > *:nth-child(2){ --r: 0.7deg; }
+  .folders > *:nth-child(3){ --r: -0.5deg; }
+
+  .folder-head{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    background:var(--head-color, var(--mustard));
+    border:none;
+    border-bottom:3px solid var(--line);
+    padding:15px 18px;
+    cursor:pointer;
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    font-size:15px;
+    color:var(--ink);
+    text-align:left;
+  }
+
+  .folder:nth-of-type(1) .folder-head{ --head-color: var(--mustard); }
+  .folder:nth-of-type(2) .folder-head{ --head-color: var(--sky); }
+  .folder:nth-of-type(3) .folder-head{ --head-color: var(--coral); }
+
+  .folder-arrow{
+    flex:none;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:20px;
+    transition: transform 0.2s ease;
+  }
+
+  .folder.open .folder-arrow{
+    transform: rotate(180deg);
+  }
+
+  .folder-body{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height 0.28s ease;
+  }
+
+  .folder.open .folder-body{
+    max-height:1000px;
+  }
+
+  .file-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 18px;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1.5px dashed var(--line);
+    font-size:14px;
+    transition: background 0.12s ease, padding-left 0.12s ease;
+  }
+
+  .folder-body a.file-row:last-child{
+    border-bottom:none;
+  }
+
+  .file-row:hover{
+    background: var(--head-color, var(--mustard));
+    padding-left:24px;
+  }
+
+  .file-dot{
+    flex:none;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    color:var(--ink);
+    opacity:0.5;
+  }
+
+  .file-name{
+    flex:1;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+  }
+
+  /* donation */
+  .donate{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-decoration:none;
+    background:var(--coral);
+    color:var(--paper);
+    border:3px solid var(--line);
+    border-radius:999px;
+    padding:16px 20px;
+    margin-top:30px;
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    font-size:15px;
+    box-shadow: 6px 6px 0 var(--line);
+    transform: rotate(-0.6deg);
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+  }
+
+  .donate:hover{
+    transform: rotate(0deg) translate(-2px,-2px);
+    box-shadow: 8px 8px 0 var(--line);
+  }
+
+  .donate-emoji{
+    font-family:'Caveat', cursive;
+    font-size:20px;
+  }
+
+  /* footer */
+  .footer{
+    margin-top:40px;
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:18px;
+    color:var(--paper);
+  }
+
+  /* shuffle button */
+  .shuffle-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:28px;
+  }
+
+  .shuffle-btn{
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:0.02em;
+    background:var(--mustard);
+    color:var(--ink);
+    border:3px solid var(--line);
+    border-radius:999px;
+    padding:12px 22px;
+    cursor:pointer;
+    box-shadow: 5px 5px 0 var(--line);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .shuffle-btn:hover{
+    transform: translate(-2px,-2px);
+    box-shadow: 7px 7px 0 var(--line);
+  }
+
+  .shuffle-btn:active{
+    transform: translate(2px,2px);
+    box-shadow: 2px 2px 0 var(--line);
+  }
+
+  .shuffle-icon{
+    display:inline-block;
+    transition: transform 0.4s ease;
+  }
+
+  .shuffle-btn.spin .shuffle-icon{
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .shuffle-btn, .shuffle-icon, .folder-body, .folder-arrow, .file-row, .donate{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="shuffle-wrap">
+      <button class="shuffle-btn" id="shuffleBtn" type="button">
+        <span class="shuffle-icon">✦</span> shuffle colors
+      </button>
+    </div>
+
+    <div class="header">
+      <span class="badge">online now</span>
+      <div class="avatar"></div>
+      <h1>All Tools</h1>
+      <p class="tagline">every tool, tap to open ✦</p>
+    </div>
+
+    <div class="folders">
+
+      <div class="folder open">
+        <button class="folder-head" type="button">
+          <span>Prompt Generator</span>
+          <span class="folder-arrow">▾</span>
+        </button>
+        <div class="folder-body">
+          <a class="file-row" href="https://galih141.github.io/Boardkingprompt/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Boardking Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/productgenerator/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Product Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/Coloringbookgenerator/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Coloringbook Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/logogen/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Logo Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/Patterngen/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Pattern Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/Motiongen/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Motion Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/Housegen/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">House Generator</span></a>
+          <a class="file-row" href="https://galih141.github.io/Racingtrack/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Racingtrack Generator</span></a>
+        </div>
+      </div>
+
+      <div class="folder">
+        <button class="folder-head" type="button">
+          <span>Tools Generated</span>
+          <span class="folder-arrow">▾</span>
+        </button>
+        <div class="folder-body">
+          <a class="file-row" href="https://galih141.github.io/colorgen/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Gradient Generator</span></a>
+          <a class="file-row" href="https://rooomly.netlify.app/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Roomly</span></a>
+          <a class="file-row" href="https://galih141.github.io/Tracer/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Tracer</span></a>
+          <a class="file-row" href="https://galih141.github.io/Calliper-gltf/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Caliper 3D Viewer</span></a>
+        </div>
+      </div>
+
+      <div class="folder">
+        <button class="folder-head" type="button">
+          <span>Content Bank</span>
+          <span class="folder-arrow">▾</span>
+        </button>
+        <div class="folder-body">
+          <a class="file-row" href="https://galih141.github.io/25fakebrief/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">25 Fake Brief</span></a>
+          <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v1</span></a>
+          <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v2</span></a>
+          <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v1</span></a>
+          <a class="file-row" href="https://taru-team.github.io/1K-ICS-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v2</span></a>
+          <a class="file-row" href="https://taru-team.github.io/1K-ICS-v3/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v3</span></a>
+          <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v4/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v4</span></a>
+          <a class="file-row" href="https://taru-team.github.io/7K-ICS-v5/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">7K ICS v5</span></a>
+          <a class="file-row" href="https://taru-team.github.io/5K-ICS-v6/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">5K ICS v6</span></a>
+          <a class="file-row" href="https://taru-team.github.io/Coloring-bank/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Coloring Bank</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <a class="donate" href="https://ko-fi.com/freetdy/goal?g=0" target="_blank" rel="noopener">
+      <span class="donate-emoji">☕</span> buy me a coffee
+    </a>
+
+    <div class="footer">made with love, 2026</div>
+
+  </div>
+
+  <script>
+    var palettes = [
+      { bg:'#173B2E', paper:'#F5EFDD', coral:'#FF6A3D', mustard:'#F4B740', sky:'#7FC6C0', line:'#131311' },
+      { bg:'#2B1E3D', paper:'#F6EEDC', coral:'#F2545B', mustard:'#F2C14E', sky:'#8FB8DE', line:'#1A1226' },
+      { bg:'#7A2E2E', paper:'#FBF1DE', coral:'#F2A65A', mustard:'#EFD9A7', sky:'#C6D8AF', line:'#241010' },
+      { bg:'#123C5E', paper:'#F3EEE1', coral:'#EF7B45', mustard:'#F6C453', sky:'#9CD1D4', line:'#0A1F30' },
+      { bg:'#3D2B1F', paper:'#F4EADC', coral:'#E4572E', mustard:'#D8A73D', sky:'#8FA998', line:'#1C1109' },
+      { bg:'#1B4B43', paper:'#F7F0DD', coral:'#FF7A5C', mustard:'#FFC857', sky:'#A6D8D0', line:'#0E211D' },
+      { bg:'#4A2545', paper:'#F5ECE1', coral:'#FF8C61', mustard:'#F9DB6D', sky:'#B8D8D8', line:'#20101D' },
+      { bg:'#0F2E3D', paper:'#F2ECDD', coral:'#F45B69', mustard:'#F8CB2E', sky:'#7FB2A6', line:'#081A22' }
+    ];
+
+    var lastIndex = -1;
+    var btn = document.getElementById('shuffleBtn');
+
+    function applyPalette(p){
+      var root = document.documentElement.style;
+      root.setProperty('--bg', p.bg);
+      root.setProperty('--paper', p.paper);
+      root.setProperty('--coral', p.coral);
+      root.setProperty('--mustard', p.mustard);
+      root.setProperty('--sky', p.sky);
+      root.setProperty('--line', p.line);
+    }
+
+    function shuffle(){
+      var idx;
+      do { idx = Math.floor(Math.random() * palettes.length); } while (idx === lastIndex);
+      lastIndex = idx;
+      applyPalette(palettes[idx]);
+
+      btn.classList.add('spin');
+      setTimeout(function(){ btn.classList.remove('spin'); }, 400);
+    }
+
+    btn.addEventListener('click', shuffle);
+
+    var folderHeads = document.querySelectorAll('.folder-head');
+    folderHeads.forEach(function(head){
+      head.addEventListener('click', function(){
+        head.closest('.folder').classList.toggle('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
