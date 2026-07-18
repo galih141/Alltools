@@ -222,6 +222,72 @@
     font-size:20px;
   }
 
+  /* pin gate */
+  .lock-icon{
+    font-family:'Caveat', cursive;
+    font-size:16px;
+    margin-left:6px;
+  }
+
+  .pin-gate{
+    padding:20px 18px 22px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    text-align:center;
+  }
+
+  .pin-gate p{
+    margin:0;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:18px;
+  }
+
+  .pin-form{
+    display:flex;
+    gap:8px;
+  }
+
+  .pin-input{
+    width:110px;
+    text-align:center;
+    letter-spacing:0.3em;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    padding:10px 8px;
+    border:3px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    color:var(--ink);
+  }
+
+  .pin-input:focus{
+    outline:none;
+    background: var(--sky);
+  }
+
+  .pin-submit{
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    font-size:12px;
+    background:var(--mustard);
+    border:3px solid var(--line);
+    border-radius:8px;
+    padding:0 16px;
+    cursor:pointer;
+  }
+
+  .pin-error{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:12px;
+    color:#B3261E;
+    min-height:14px;
+    margin:0;
+  }
+
   /* footer */
   .footer{
     margin-top:40px;
@@ -330,22 +396,32 @@
         </div>
       </div>
 
-      <div class="folder">
+      <div class="folder locked" id="contentBankFolder">
         <button class="folder-head" type="button">
-          <span>Content Bank</span>
+          <span>Content Bank <span class="lock-icon">🔒</span></span>
           <span class="folder-arrow">▾</span>
         </button>
         <div class="folder-body">
-          <a class="file-row" href="https://galih141.github.io/25fakebrief/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">25 Fake Brief</span></a>
-          <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v1</span></a>
-          <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v2</span></a>
-          <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v1</span></a>
-          <a class="file-row" href="https://taru-team.github.io/1K-ICS-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v2</span></a>
-          <a class="file-row" href="https://taru-team.github.io/1K-ICS-v3/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v3</span></a>
-          <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v4/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v4</span></a>
-          <a class="file-row" href="https://taru-team.github.io/7K-ICS-v5/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">7K ICS v5</span></a>
-          <a class="file-row" href="https://taru-team.github.io/5K-ICS-v6/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">5K ICS v6</span></a>
-          <a class="file-row" href="https://taru-team.github.io/Coloring-bank/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Coloring Bank</span></a>
+          <div class="pin-gate" id="pinGate">
+            <p>enter pin to unlock ✦</p>
+            <form class="pin-form" id="pinForm">
+              <input class="pin-input" id="pinInput" type="password" inputmode="numeric" maxlength="5" placeholder="•••••" autocomplete="off">
+              <button class="pin-submit" type="submit">Go</button>
+            </form>
+            <p class="pin-error" id="pinError"></p>
+          </div>
+          <div id="contentBankLinks" style="display:none;">
+            <a class="file-row" href="https://galih141.github.io/25fakebrief/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">25 Fake Brief</span></a>
+            <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v1</span></a>
+            <a class="file-row" href="https://taru-team.github.io/Freetdy-motion-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Free TDY Motion v2</span></a>
+            <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v1/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v1</span></a>
+            <a class="file-row" href="https://taru-team.github.io/1K-ICS-v2/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v2</span></a>
+            <a class="file-row" href="https://taru-team.github.io/1K-ICS-v3/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1K ICS v3</span></a>
+            <a class="file-row" href="https://taru-team.github.io/1.5K-ICS-v4/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">1.5K ICS v4</span></a>
+            <a class="file-row" href="https://taru-team.github.io/7K-ICS-v5/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">7K ICS v5</span></a>
+            <a class="file-row" href="https://taru-team.github.io/5K-ICS-v6/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">5K ICS v6</span></a>
+            <a class="file-row" href="https://taru-team.github.io/Coloring-bank/" target="_blank" rel="noopener"><span class="file-dot">✦</span><span class="file-name">Coloring Bank</span></a>
+          </div>
         </div>
       </div>
 
@@ -401,6 +477,29 @@
       head.addEventListener('click', function(){
         head.closest('.folder').classList.toggle('open');
       });
+    });
+
+    var CONTENT_BANK_PIN = '55555';
+    var pinForm = document.getElementById('pinForm');
+    var pinInput = document.getElementById('pinInput');
+    var pinError = document.getElementById('pinError');
+    var pinGate = document.getElementById('pinGate');
+    var contentBankLinks = document.getElementById('contentBankLinks');
+    var contentBankFolder = document.getElementById('contentBankFolder');
+
+    pinForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (pinInput.value === CONTENT_BANK_PIN) {
+        pinGate.style.display = 'none';
+        contentBankLinks.style.display = 'block';
+        contentBankFolder.classList.remove('locked');
+        var lockIcon = contentBankFolder.querySelector('.lock-icon');
+        if (lockIcon) lockIcon.textContent = '🔓';
+      } else {
+        pinError.textContent = 'wrong pin, try again';
+        pinInput.value = '';
+        pinInput.focus();
+      }
     });
   </script>
 
