@@ -1,0 +1,112 @@
+{
+  "promptGenerator": [
+    {
+      "title": "Boardking Generator",
+      "link": "https://galih141.github.io/Boardkingprompt/"
+    },
+    {
+      "title": "Product Generator",
+      "link": "https://galih141.github.io/productgenerator/"
+    },
+    {
+      "title": "Coloringbook Generator",
+      "link": "https://galih141.github.io/Coloringbookgenerator/"
+    },
+    {
+      "title": "Logo Generator",
+      "link": "https://galih141.github.io/logogen/"
+    },
+    {
+      "title": "Pattern Generator",
+      "link": "https://galih141.github.io/Patterngen/"
+    },
+    {
+      "title": "Motion Generator",
+      "link": "https://galih141.github.io/Motiongen/"
+    },
+    {
+      "title": "House Generator",
+      "link": "https://galih141.github.io/Housegen/"
+    },
+    {
+      "title": "Racingtrack Generator",
+      "link": "https://galih141.github.io/Racingtrack/"
+    }
+  ],
+  "toolsGenerated": [
+    {
+      "title": "Gradient Generator",
+      "link": "https://galih141.github.io/Gradientgen/"
+    },
+    {
+      "title": "Roomly",
+      "link": "https://rooomly.netlify.app/"
+    },
+    {
+      "title": "Tracer",
+      "link": "https://galih141.github.io/Tracer/"
+    },
+    {
+      "title": "Caliper 3D Viewer",
+      "link": "https://galih141.github.io/Calliper-gltf/"
+    },
+    {
+      "title": "Seamlesly",
+      "link": "https://galih141.github.io/Seamlesly/"
+    },
+    {
+      "title": "Gridwork",
+      "link": "https://galih141.github.io/Gridwork/"
+    }
+  ],
+  "contentBank": [
+    {
+      "title": "25 Fake Brief",
+      "link": "https://galih141.github.io/25fakebrief/"
+    },
+    {
+      "title": "Free TDY Motion v1",
+      "link": "https://taru-team.github.io/Freetdy-motion-v1/"
+    },
+    {
+      "title": "Free TDY Motion v2",
+      "link": "https://taru-team.github.io/Freetdy-motion-v2/"
+    },
+    {
+      "title": "1.5K ICS v1",
+      "link": "https://taru-team.github.io/1.5K-ICS-v1/"
+    },
+    {
+      "title": "1K ICS v2",
+      "link": "https://taru-team.github.io/1K-ICS-v2/"
+    },
+    {
+      "title": "1K ICS v3",
+      "link": "https://taru-team.github.io/1K-ICS-v3/"
+    },
+    {
+      "title": "1.5K ICS v4",
+      "link": "https://taru-team.github.io/1.5K-ICS-v4/"
+    },
+    {
+      "title": "7K ICS v5",
+      "link": "https://taru-team.github.io/7K-ICS-v5/"
+    },
+    {
+      "title": "5K ICS v6",
+      "link": "https://taru-team.github.io/5K-ICS-v6/"
+    },
+    {
+      "title": "Badge ICS v7",
+      "link": "https://taru-team.github.io/BDG-ICS-v7/"
+    },
+    {
+      "title": "Badge ICS v8",
+      "link": "https://galih141.github.io/Badge-ICS-v8/"
+    },
+    {
+      "title": "Coloring Bank",
+      "link": "https://taru-team.github.io/Coloring-bank/"
+    }
+  ]
+}
